@@ -10,9 +10,13 @@ CONTROL FLOW SO FAR
 
 TODO
 --------------------------------------------------
+[  ] Integrate the clock, the command line, and the border
+	[  ] Call it test_window_v1
+	[  ] Tests for bugs
+[  ] Cursor not reset after application use
 [  ] IF WINDOW SIZE CHANGES, UPDATE THE WHOLE SCREEN
 	 TIMER, BORDER, CMD
-[  ] PRINT COMMAND ON BOTTOM, AND PRINT ERROR MESSAGE THER ALSO
+[  ] PRINT COMMAND ON BOTTOM, AND PRINT ERROR MESSAGE THERE ALSO
 [  ] ADD THE CMD TO THE BORDER
 [  ] ENFORCE MINIMUM SIZE LIMIT
      PRINT [ PLEASE MAKE LARGER ON DISPLAY ]

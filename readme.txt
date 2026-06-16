@@ -31,7 +31,7 @@ tasks are stored in a separate .json file; see below
 ==========================================================
 >home, hm					;go back to home page
 
->help, h					;print the help menu with the flags and commands and stuff
+>help, h, ?					;print the help menu with the flags and commands and stuff
 	
 >clock, c
 	-set --time military	;set the time to military format
@@ -63,7 +63,7 @@ tasks are stored in a separate .json file; see below
 		priority                    ;by priority (then by deadline), 
 		deadline	[default]       ;by deadline
 		status						;by status (done or not done and all that)
-	-set							;some settings
+	-setting						;some settings
 		done-invisible				;do not show done
 
 							task field is :
@@ -90,7 +90,14 @@ tasks are stored in a separate .json file; see below
 					
 		
 >exit, q, quit		;exit the application
-
+>history			;show command history
+	-[n]			;start with command [n]
+>lock				;lock the program, only allow entrance with username and password
+					;check externally, keep locked as long as not unlocked
+	-add_usr		;add new user and password
+	-remove_usr,rm_user ; remove user
+	-
+					;obfuscate this shit
 ==========================================================
 DISPLAY SCREEN
 ==========================================================
