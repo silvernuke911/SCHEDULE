@@ -413,7 +413,7 @@ void process_commands(ParsedCommand cmd) {
 void clear_message_if_expired() {
     if (cmdline.showing_message && (GetTickCount() - cmdline.message_start_time) >= 1000) {
 		clear_status();
-        draw_command_prompt();
+        // draw_command_prompt();
         cmdline.showing_message = 0;
         // temporary;
         clear_screen();
@@ -425,9 +425,34 @@ void load_history_command() {
     clear_command_line();
     strcpy(cmdline.buffer, history.history[history.index]);
     cmdline.cursor_pos = strlen(cmdline.buffer);
+    
+    // Calculate max display width (subtract prompt and margins)
+    int max_display = term.width - 4 - term.prompt_len;
+    int len = strlen(cmdline.buffer);
+    
+    // Determine starting position for scrolling
+    int start = 0;
+    if (len > max_display) {
+        start = len - max_display;
+    }
+    
+    // Print only the visible portion
     gotoxy(2 + term.prompt_len, term.height - 3);
-    printf("%s", cmdline.buffer);
+    int visible_len = (len - start < max_display) ? len - start : max_display;
+    for (int i = 0; i < visible_len; i++) {
+        printf("%c", cmdline.buffer[start + i]);
+    }
+    
+    // Clear any remaining characters
+    for (int i = visible_len; i < max_display; i++) {
+        printf(" ");
+    }
+    
+    // Position cursor
+    int cursor_offset = cmdline.cursor_pos - start;
+    gotoxy(2 + term.prompt_len + cursor_offset, term.height - 3);
     draw_manual_cursor();
+    fflush(stdout);
 }
 // ==================== INPUT HANDLING ====================
 
@@ -566,6 +591,6 @@ int main()
     }
     cleanup();                       // exit cleanup code
     gotoxy(0, term.height);
-    printf("\n\nGoodbye!\n");        // print exit message
+    printf("\n\nGoodbye!");        // print exit message
     return 0;                        // exit code success
 }
